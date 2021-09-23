@@ -1,4 +1,4 @@
-#include "BinarySearchTree"
+#include "BinarySearchTree.h"
 
 BinarySearchTreeNode *createBinarySearchTree(int value)
 {
