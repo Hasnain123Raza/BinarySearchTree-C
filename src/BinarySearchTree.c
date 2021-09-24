@@ -1,5 +1,7 @@
 #include "BinarySearchTree.h"
 
+/* Constructor and Destructor */
+
 BinarySearchTreeNode *createBinarySearchTree(int value)
 {
 	BinarySearchTreeNode *newNode = malloc(sizeof(BinarySearchTreeNode));
@@ -23,7 +25,7 @@ void destroyBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
 	free(binarySearchTree);
 }
 
-
+/* Insert and Delete */
 
 int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
 {
@@ -55,4 +57,54 @@ int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int valu
 	}
 	else
 		return 0;	/* No Duplicates */
+}
+
+/* Tree Dimension Functions */
+
+int getSizeBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
+{
+	return 1 + (binarySearchTree->left ? getSizeBinarySearchTree(binarySearchTree->left) : 0) + (binarySearchTree->right ? getSizeBinarySearchTree(binarySearchTree->right) : 0);
+}
+
+int getHeightBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
+{
+
+}
+
+/* Tree Traversal Functions */
+
+void inOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer)
+{
+	if (binarySearchTree->left)
+		inOrderTraversalBinarySearchTree(binarySearchTree->left, valuesArrayPointer, currentIndexPointer);
+
+	*(valuesArrayPointer + *currentIndexPointer) = binarySearchTree->value;
+	(*currentIndexPointer)++;
+
+	if (binarySearchTree->right)
+		inOrderTraversalBinarySearchTree(binarySearchTree->right, valuesArrayPointer, currentIndexPointer);
+}
+
+void preOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer)
+{
+	*(valuesArrayPointer + *currentIndexPointer) = binarySearchTree->value;
+	(*currentIndexPointer)++;
+
+	if (binarySearchTree->left)
+		preOrderTraversalBinarySearchTree(binarySearchTree->left, valuesArrayPointer, currentIndexPointer);
+	
+	if (binarySearchTree->right)
+		preOrderTraversalBinarySearchTree(binarySearchTree->right, valuesArrayPointer, currentIndexPointer);
+}
+
+void postOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer)
+{
+	if (binarySearchTree->left)
+		postOrderTraversalBinarySearchTree(binarySearchTree->left, valuesArrayPointer, currentIndexPointer);
+	
+	if (binarySearchTree->right)
+		postOrderTraversalBinarySearchTree(binarySearchTree->right, valuesArrayPointer, currentIndexPointer);
+
+	*(valuesArrayPointer + *currentIndexPointer) = binarySearchTree->value;
+	(*currentIndexPointer)++;
 }
