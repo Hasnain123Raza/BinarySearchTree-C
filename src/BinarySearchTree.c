@@ -59,6 +59,11 @@ int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int valu
 		return 0;	/* No Duplicates */
 }
 
+void removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
+{
+
+}
+
 /* Tree Dimension Functions */
 
 int getSizeBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
