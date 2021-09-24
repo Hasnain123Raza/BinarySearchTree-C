@@ -66,9 +66,26 @@ int getSizeBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
 	return 1 + (binarySearchTree->left ? getSizeBinarySearchTree(binarySearchTree->left) : 0) + (binarySearchTree->right ? getSizeBinarySearchTree(binarySearchTree->right) : 0);
 }
 
-int getHeightBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
+static void recursiveGetDepthBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *maximumDepth, int currentDepth)
 {
+	if (currentDepth > *maximumDepth)
+		*maximumDepth = currentDepth;
 
+	if (binarySearchTree->left)
+		recursiveGetDepthBinarySearchTree(binarySearchTree->left, maximumDepth, currentDepth + 1);
+
+	if (binarySearchTree->right)
+		recursiveGetDepthBinarySearchTree(binarySearchTree->right, maximumDepth, currentDepth + 1);
+
+}
+
+int getDepthBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
+{
+	int maximumDepth = 0;
+	
+	recursiveGetDepthBinarySearchTree(binarySearchTree, &maximumDepth, 0);
+
+	return maximumDepth;
 }
 
 /* Tree Traversal Functions */

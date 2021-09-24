@@ -22,7 +22,7 @@ int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int valu
 /* Tree Dimension Functions */
 
 int getSizeBinarySearchTree(BinarySearchTreeNode *binarySearchTree);
-int getHeightBinarySearchTree(BinarySearchTreeNode *binarySearchTree);
+int getDepthBinarySearchTree(BinarySearchTreeNode *binarySearchTree);
 
 /* Tree Traversal Functions */
 

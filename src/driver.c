@@ -39,6 +39,7 @@ int main(void)
 		printf("\n");
 		
 		printf("Size of Tree: %d\n", getSizeBinarySearchTree(binarySearchTree));
+		printf("Depth of Tree: %d\n", getDepthBinarySearchTree(binarySearchTree));
 
 		printf("InOrder Traversal: ");
 		printInOrder(binarySearchTree);
