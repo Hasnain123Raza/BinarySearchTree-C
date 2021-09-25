@@ -69,31 +69,34 @@ static BinarySearchTreeNode *getMaximumValueBinarySearchTree(BinarySearchTreeNod
 	return currentNode;
 }
 
-void removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
+BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
 {
 	if (value < binarySearchTree->value)
-		removeValueBinarySearchTree(binarySearchTree->left, value);
+		binarySearchTree->left = removeValueBinarySearchTree(binarySearchTree->left, value);
 	else if (value > binarySearchTree->value)
-		removeValueBinarySearchTree(binarySearchTree->right, value);
+		binarySearchTree->right = removeValueBinarySearchTree(binarySearchTree->right, value);
 	else
 	{
 		if (binarySearchTree->left && binarySearchTree->right)
 		{
 			BinarySearchTreeNode *maximumValueNode = getMaximumValueBinarySearchTree(binarySearchTree->left);
 			binarySearchTree->value = maximumValueNode->value;
-			removeValueBinarySearchTree(maximumValueNode, maximumValueNode->value);
+			return removeValueBinarySearchTree(maximumValueNode, maximumValueNode->value);
 		}
 		else if (binarySearchTree->left || binarySearchTree->right)
 		{
 			BinarySearchTreeNode *childNode = binarySearchTree->left ? binarySearchTree->left : binarySearchTree->right;
-			binarySearchTree->value = childNode->value;
-			free(childNode);
+			free(binarySearchTree);
+			return childNode;
 		}
 		else
 		{
 			free(binarySearchTree);
+			return NULL;
 		}
 	}
+
+	return binarySearchTree;
 }
 
 /* Tree Dimension Functions */

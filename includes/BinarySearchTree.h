@@ -18,7 +18,7 @@ void destroyBinarySearchTree(BinarySearchTreeNode *binarySearchTree);
 /* Insert and Delete */
 
 int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value);
-void removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value);
+BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value);
 
 /* Tree Dimension Functions */
 

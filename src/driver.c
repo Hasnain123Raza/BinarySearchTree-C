@@ -37,7 +37,7 @@ int main(void)
 		}
 		else
 		{
-			removeValueBinarySearchTree(binarySearchTree, input * -1);
+			binarySearchTree = removeValueBinarySearchTree(binarySearchTree, input * -1);
 		}
 
 		printf("\n");
