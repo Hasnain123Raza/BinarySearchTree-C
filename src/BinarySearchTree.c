@@ -71,6 +71,9 @@ static BinarySearchTreeNode *getMaximumValueBinarySearchTree(BinarySearchTreeNod
 
 BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
 {
+	if (binarySearchTree == NULL)
+		return binarySearchTree;
+
 	if (value < binarySearchTree->value)
 		binarySearchTree->left = removeValueBinarySearchTree(binarySearchTree->left, value);
 	else if (value > binarySearchTree->value)
@@ -81,7 +84,7 @@ BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySe
 		{
 			BinarySearchTreeNode *maximumValueNode = getMaximumValueBinarySearchTree(binarySearchTree->left);
 			binarySearchTree->value = maximumValueNode->value;
-			return removeValueBinarySearchTree(maximumValueNode, maximumValueNode->value);
+			binarySearchTree->left = removeValueBinarySearchTree(binarySearchTree->left, maximumValueNode->value);
 		}
 		else if (binarySearchTree->left || binarySearchTree->right)
 		{
