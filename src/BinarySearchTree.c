@@ -59,9 +59,41 @@ int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int valu
 		return 0;	/* No Duplicates */
 }
 
+static BinarySearchTreeNode *getMaximumValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
+{
+	BinarySearchTreeNode *currentNode = binarySearchTree;
+
+	while (currentNode && currentNode->right != NULL)
+		currentNode = currentNode->right;
+
+	return currentNode;
+}
+
 void removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
 {
-
+	if (value < binarySearchTree->value)
+		removeValueBinarySearchTree(binarySearchTree->left, value);
+	else if (value > binarySearchTree->value)
+		removeValueBinarySearchTree(binarySearchTree->right, value);
+	else
+	{
+		if (binarySearchTree->left && binarySearchTree->right)
+		{
+			BinarySearchTreeNode *maximumValueNode = getMaximumValueBinarySearchTree(binarySearchTree->left);
+			binarySearchTree->value = maximumValueNode->value;
+			removeValueBinarySearchTree(maximumValueNode, maximumValueNode->value);
+		}
+		else if (binarySearchTree->left || binarySearchTree->right)
+		{
+			BinarySearchTreeNode *childNode = binarySearchTree->left ? binarySearchTree->left : binarySearchTree->right;
+			binarySearchTree->value = childNode->value;
+			free(childNode);
+		}
+		else
+		{
+			free(binarySearchTree);
+		}
+	}
 }
 
 /* Tree Dimension Functions */

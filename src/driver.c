@@ -22,17 +22,24 @@ int main(void)
 	{
 		int input;
 
-		printf("Please enter a number (to exit, enter -ive number):\n");
+		printf("Please enter a number (+ive to add, -ive to remove, 0 to quit):\n");
 		scanf("%d", &input);
 
-		if (input < 0)
+		if (input == 0)
 			break;
 
-		if (binarySearchTree == NULL)
-			binarySearchTree = createBinarySearchTree(input);
+		if (input > 0)
+		{
+			if (binarySearchTree == NULL)
+				binarySearchTree = createBinarySearchTree(input);
+			else
+				insertValueBinarySearchTree(binarySearchTree, input);
+		}
 		else
-			insertValueBinarySearchTree(binarySearchTree, input);
-		
+		{
+			removeValueBinarySearchTree(binarySearchTree, input * -1);
+		}
+
 		printf("\n");
 
 		printBinarySearchTree(binarySearchTree, "", 0);
