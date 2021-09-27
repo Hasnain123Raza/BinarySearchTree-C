@@ -133,38 +133,38 @@ int getDepthBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
 
 /* Tree Traversal Functions */
 
-void inOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer)
+void inOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, BinarySearchTreeNode **nodesArrayPointer, int *currentIndexPointer)
 {
 	if (binarySearchTree->left)
-		inOrderTraversalBinarySearchTree(binarySearchTree->left, valuesArrayPointer, currentIndexPointer);
+		inOrderTraversalBinarySearchTree(binarySearchTree->left, nodesArrayPointer, currentIndexPointer);
 
-	*(valuesArrayPointer + *currentIndexPointer) = binarySearchTree->value;
+	*(nodesArrayPointer + *currentIndexPointer) = binarySearchTree;
 	(*currentIndexPointer)++;
 
 	if (binarySearchTree->right)
-		inOrderTraversalBinarySearchTree(binarySearchTree->right, valuesArrayPointer, currentIndexPointer);
+		inOrderTraversalBinarySearchTree(binarySearchTree->right, nodesArrayPointer, currentIndexPointer);
 }
 
-void preOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer)
+void preOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, BinarySearchTreeNode **nodesArrayPointer, int *currentIndexPointer)
 {
-	*(valuesArrayPointer + *currentIndexPointer) = binarySearchTree->value;
+	*(nodesArrayPointer + *currentIndexPointer) = binarySearchTree;
 	(*currentIndexPointer)++;
 
 	if (binarySearchTree->left)
-		preOrderTraversalBinarySearchTree(binarySearchTree->left, valuesArrayPointer, currentIndexPointer);
+		preOrderTraversalBinarySearchTree(binarySearchTree->left, nodesArrayPointer, currentIndexPointer);
 	
 	if (binarySearchTree->right)
-		preOrderTraversalBinarySearchTree(binarySearchTree->right, valuesArrayPointer, currentIndexPointer);
+		preOrderTraversalBinarySearchTree(binarySearchTree->right, nodesArrayPointer, currentIndexPointer);
 }
 
-void postOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer)
+void postOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, BinarySearchTreeNode **nodesArrayPointer, int *currentIndexPointer)
 {
 	if (binarySearchTree->left)
-		postOrderTraversalBinarySearchTree(binarySearchTree->left, valuesArrayPointer, currentIndexPointer);
+		postOrderTraversalBinarySearchTree(binarySearchTree->left, nodesArrayPointer, currentIndexPointer);
 	
 	if (binarySearchTree->right)
-		postOrderTraversalBinarySearchTree(binarySearchTree->right, valuesArrayPointer, currentIndexPointer);
+		postOrderTraversalBinarySearchTree(binarySearchTree->right, nodesArrayPointer, currentIndexPointer);
 
-	*(valuesArrayPointer + *currentIndexPointer) = binarySearchTree->value;
+	*(nodesArrayPointer + *currentIndexPointer) = binarySearchTree;
 	(*currentIndexPointer)++;
 }

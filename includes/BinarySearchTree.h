@@ -27,8 +27,8 @@ int getDepthBinarySearchTree(BinarySearchTreeNode *binarySearchTree);
 
 /* Tree Traversal Functions */
 
-void inOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer);
-void preOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer);
-void postOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int *valuesArrayPointer, int *currentIndexPointer);
+void inOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, BinarySearchTreeNode **nodesArrayPointer, int *currentIndexPointer);
+void preOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, BinarySearchTreeNode **nodesArrayPointer, int *currentIndexPointer);
+void postOrderTraversalBinarySearchTree(BinarySearchTreeNode *binarySearchTree, BinarySearchTreeNode **nodesArrayPointer, int *currentIndexPointer);
 
 #endif

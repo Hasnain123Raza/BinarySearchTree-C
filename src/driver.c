@@ -84,39 +84,39 @@ void printBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *prefix,
 	printBinarySearchTree(binarySearchTree->right, newPrefix, 0);
 }
 
-void printArray(int *array, int length)
+void printArray(BinarySearchTreeNode **array, int length)
 {
 	for (int index = 0; index < length; index++)
-		printf("%d, ", *(array + index));
+		printf("%d, ", (*(array + index))->value);
 }
 
 void printInOrder(BinarySearchTreeNode *binarySearchTree)
 {
 	int binarySearchTreeSize = getSizeBinarySearchTree(binarySearchTree);
-	int values[binarySearchTreeSize];
+	BinarySearchTreeNode *nodes[binarySearchTreeSize];
 	int currentIndex = 0;
 
-	inOrderTraversalBinarySearchTree(binarySearchTree, values, &currentIndex);
-	printArray(values, binarySearchTreeSize);
+	inOrderTraversalBinarySearchTree(binarySearchTree, nodes, &currentIndex);
+	printArray(nodes, binarySearchTreeSize);
 }
 
 void printPreOrder(BinarySearchTreeNode *binarySearchTree)
 {
 	int binarySearchTreeSize = getSizeBinarySearchTree(binarySearchTree);
-	int values[binarySearchTreeSize];
+	BinarySearchTreeNode *nodes[binarySearchTreeSize];
 	int currentIndex = 0;
 
-	preOrderTraversalBinarySearchTree(binarySearchTree, values, &currentIndex);
-	printArray(values, binarySearchTreeSize);
+	preOrderTraversalBinarySearchTree(binarySearchTree, nodes, &currentIndex);
+	printArray(nodes, binarySearchTreeSize);
 }
 
 void printPostOrder(BinarySearchTreeNode *binarySearchTree)
 {
 	int binarySearchTreeSize = getSizeBinarySearchTree(binarySearchTree);
-	int values[binarySearchTreeSize];
+	BinarySearchTreeNode *nodes[binarySearchTreeSize];
 	int currentIndex = 0;
 
-	postOrderTraversalBinarySearchTree(binarySearchTree, values, &currentIndex);
-	printArray(values, binarySearchTreeSize);
+	postOrderTraversalBinarySearchTree(binarySearchTree, nodes, &currentIndex);
+	printArray(nodes, binarySearchTreeSize);
 
 }
