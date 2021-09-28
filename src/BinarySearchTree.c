@@ -2,12 +2,12 @@
 
 /* Constructor and Destructor */
 
-BinarySearchTreeNode *createBinarySearchTree(int value)
+BinarySearchTreeNode *createBinarySearchTree(char *value)
 {
 	BinarySearchTreeNode *newNode = malloc(sizeof(BinarySearchTreeNode));
 	if (!newNode)
 		return NULL;
-	newNode->value = value;
+	strncpy(newNode->value, value, strlen(value));
 	newNode->left = NULL;
 	newNode->right = NULL;
 
@@ -27,9 +27,11 @@ void destroyBinarySearchTree(BinarySearchTreeNode *binarySearchTree)
 
 /* Insert and Delete */
 
-int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
+int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *value)
 {
-	if (value < binarySearchTree->value)
+	int comparison = strcmp(value, binarySearchTree->value);
+
+	if (comparison < 0)
 	{
 		if (binarySearchTree->left)
 			return insertValueBinarySearchTree(binarySearchTree->left, value);
@@ -42,7 +44,7 @@ int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int valu
 			return 1;
 		}
 	}
-	else if (value > binarySearchTree->value)
+	else if (comparison > 0)
 	{
 		if (binarySearchTree->right)
 			return insertValueBinarySearchTree(binarySearchTree->right, value);
@@ -69,21 +71,22 @@ static BinarySearchTreeNode *getMaximumValueBinarySearchTree(BinarySearchTreeNod
 	return currentNode;
 }
 
-BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value)
+BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *value)
 {
 	if (binarySearchTree == NULL)
 		return binarySearchTree;
 
-	if (value < binarySearchTree->value)
+	int comparison = strcmp(value, binarySearchTree->value);
+	if (comparison < 0)
 		binarySearchTree->left = removeValueBinarySearchTree(binarySearchTree->left, value);
-	else if (value > binarySearchTree->value)
+	else if (comparison > 0)
 		binarySearchTree->right = removeValueBinarySearchTree(binarySearchTree->right, value);
 	else
 	{
 		if (binarySearchTree->left && binarySearchTree->right)
 		{
 			BinarySearchTreeNode *maximumValueNode = getMaximumValueBinarySearchTree(binarySearchTree->left);
-			binarySearchTree->value = maximumValueNode->value;
+			strcpy(binarySearchTree->value, maximumValueNode->value);
 			binarySearchTree->left = removeValueBinarySearchTree(binarySearchTree->left, maximumValueNode->value);
 		}
 		else if (binarySearchTree->left || binarySearchTree->right)

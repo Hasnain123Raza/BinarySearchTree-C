@@ -4,14 +4,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define PREFIX_BUFFER_SIZE 128
+#define PREFIX_BUFFER_SIZE 256
+
+void flushStandardInput();
+char *readStandardInput(char *buffer, int length);
 
 void printBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *prefix, int isLeft);
 
 void printInOrder(BinarySearchTreeNode *binarySearchTree);
-
 void printPreOrder(BinarySearchTreeNode *binarySearchTree);
-
 void printPostOrder(BinarySearchTreeNode *binarySearchTree);
 
 int main(void)
@@ -20,15 +21,16 @@ int main(void)
 
 	while (1)
 	{
-		int input;
+		char input[WORD_SIZE] = {};
 
-		printf("Please enter a number (+ive to add, -ive to remove, 0 to quit):\n");
-		scanf("%d", &input);
+		printf("Please enter a word (to remove a word, prefix it with - and to quit the program, input *):\n");
+		readStandardInput(input, WORD_SIZE);
+		printf("\n");
 
-		if (input == 0)
+		if (input[0] == '*')
 			break;
 
-		if (input > 0)
+		if (input[0] != '-')
 		{
 			if (binarySearchTree == NULL)
 				binarySearchTree = createBinarySearchTree(input);
@@ -37,10 +39,11 @@ int main(void)
 		}
 		else
 		{
-			binarySearchTree = removeValueBinarySearchTree(binarySearchTree, input * -1);
-		}
+			for (int counter = 0; input[counter] != '\0'; counter++)
+				input[counter] = input[counter + 1];
 
-		printf("\n");
+			binarySearchTree = removeValueBinarySearchTree(binarySearchTree, input);
+		}
 
 		printBinarySearchTree(binarySearchTree, "", 0);
 		printf("\n");
@@ -66,6 +69,28 @@ int main(void)
 	return 0;
 }
 
+void flushStandardInput()
+{
+	char c;
+	while ((c = getchar()) != '\n' && c != EOF)
+		;
+}
+
+char *readStandardInput(char *buffer, int length)
+{
+	if (!fgets(buffer, length, stdin))
+		buffer = NULL;
+
+	int actualLength = strlen(buffer);
+	if (actualLength == length - 1)
+		flushStandardInput();
+
+	if (buffer[actualLength - 1] == '\n')
+		buffer[actualLength - 1] = '\0';
+
+	return buffer;
+}
+
 void printBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *prefix, int isLeft)
 {
 	if (binarySearchTree == NULL)
@@ -73,10 +98,10 @@ void printBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *prefix,
 
 	printf("%s", prefix);
 	printf(isLeft ? "├──" : "└──");
-	printf("%d", binarySearchTree->value);
+	printf("%s", binarySearchTree->value);
 	printf("\n");
 	
-	char newPrefix[PREFIX_BUFFER_SIZE];
+	char newPrefix[PREFIX_BUFFER_SIZE] = {};
 	strcat(newPrefix, prefix);
 	strcat(newPrefix,  (isLeft ? "│   " : "    "));
 
@@ -86,8 +111,8 @@ void printBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *prefix,
 
 void printArray(BinarySearchTreeNode **array, int length)
 {
-	for (int index = 0; index < length; index++)
-		printf("%d, ", (*(array + index))->value);
+	for (int index = 0; index < length; index++)	
+		printf("%s, ", (*(array + index))->value);
 }
 
 void printInOrder(BinarySearchTreeNode *binarySearchTree)

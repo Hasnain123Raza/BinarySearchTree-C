@@ -3,22 +3,25 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define WORD_SIZE 16
 
 typedef struct BinarySearchTreeNode {
-	int value;
+	char value[WORD_SIZE];
 	struct BinarySearchTreeNode *left;
 	struct BinarySearchTreeNode *right;
 } BinarySearchTreeNode;
 
 /* Constructor and Destructor */
 
-BinarySearchTreeNode *createBinarySearchTree(int value);
+BinarySearchTreeNode *createBinarySearchTree(char *value);
 void destroyBinarySearchTree(BinarySearchTreeNode *binarySearchTree);
 
 /* Insert and Delete */
 
-int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value);
-BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, int value);
+int insertValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *value);
+BinarySearchTreeNode *removeValueBinarySearchTree(BinarySearchTreeNode *binarySearchTree, char *value);
 
 /* Tree Dimension Functions */
 
